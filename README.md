@@ -1,84 +1,32 @@
-# 🏥 DiabetesReadmit-ML
-
-> Predicting 30-day hospital readmission in diabetic patients using machine learning — featuring full EDA, Random Forest classification, SMOTE balancing, and interactive dashboards built in Plotly, Tableau, Power BI, and Streamlit.
-
----
-
-## 📌 Repository Name Suggestions
-
-| Name | Style |
-|---|---|
-| `DiabetesReadmit-ML` | Clean, descriptive ✅ |
-| `readmission-risk-predictor` | Action-oriented |
-| `diabetes-readmission-analysis` | Academic/straightforward |
-| `hospital-readmit-ml` | Short and searchable |
-| `diabetic-risk-classifier` | ML-focused |
-
-**Recommended:** `DiabetesReadmit-ML`
-
-## 📝 GitHub Repository Description Suggestions
-
-- `Predicting 30-day hospital readmission in diabetic patients using Random Forest, SMOTE, and interactive dashboards (Tableau, Power BI, Streamlit).`
-- `End-to-end ML pipeline for diabetic readmission risk prediction — EDA, classification, and 4 interactive dashboards.`
-- `ML-powered early readmission risk scoring for diabetic patients | UCI dataset | Random Forest | Plotly + Tableau + Power BI + Streamlit`
-
----
-
-## 📋 Table of Contents
-
-- [Project Overview](#-project-overview)
-- [Dataset](#-dataset)
-- [Project Structure](#-project-structure)
-- [Pipeline Overview](#-pipeline-overview)
-- [Data Cleaning](#-data-cleaning)
-- [Exploratory Data Analysis](#-exploratory-data-analysis)
-- [Machine Learning](#-machine-learning)
-- [Dashboards](#-dashboards)
-- [Results](#-results)
-- [How to Run](#-how-to-run)
-- [Requirements](#-requirements)
-- [Team](#-team)
-- [References](#-references)
-
----
-
-## 🔍 Project Overview
+## Overview
 
 Hospital readmission within 30 days is one of the most costly and preventable problems in modern healthcare. In the U.S. alone, preventable readmissions cost an estimated **$26 billion annually**, and hospitals face penalties under Medicare's Hospital Readmissions Reduction Program (HRRP) for excessive rates.
 
 This project builds an end-to-end machine learning pipeline to **predict whether a diabetic patient will be readmitted within 30 days of discharge**, using clinical and administrative data routinely collected during hospital stays.
 
 ### 🎯 Research Question
-> *Can we accurately predict 30-day hospital readmission in diabetic patients using routine clinical data — and which patient features drive that risk most strongly?*
-
-### Key Findings
-- **Random Forest** outperformed Logistic Regression across all metrics (ROC-AUC: 0.714, Recall: 0.411)
-- **Prior healthcare utilization** (total prior visits) was the single strongest predictor of early readmission
-- Patients with 7+ prior visits had readmission rates **3× higher** than those with no prior visits
-- Class imbalance (only 11.2% positive class) required SMOTE — naive accuracy would be misleading at 88.7%
-
----
+> *Can we accurately predict 30-day hospital readmission in diabetic patients using routine clinical data - and which patient features drive that risk most strongly?*
 
 ## 📊 Dataset
 
-| Property | Detail |
-|---|---|
-| **Name** | Diabetes 130-US Hospitals (1999–2008) |
-| **Source** | [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Diabetes+130-US+hospitals+for+years+1999-2008) |
-| **Records** | 101,766 patient encounters |
-| **Features** | 50 (demographic, clinical, medication, diagnostic) |
-| **Target** | `readmitted` → binarized to `<30 days` vs. `not` |
-| **Class Balance** | 11.2% positive (readmitted <30d) — severely imbalanced |
-| **Time Period** | 1999 – 2008 |
-| **Hospitals** | 130 U.S. hospitals and integrated delivery networks |
+        | Property | Detail |
+        |---|---|
+        | **Name** | Diabetes 130-US Hospitals (1999–2008) |
+        | **Source** | [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Diabetes+130-US+hospitals+for+years+1999-2008) |
+        | **Records** | 101,766 patient encounters |
+        | **Features** | 50 (demographic, clinical, medication, diagnostic) |
+        | **Target** | `readmitted` → binarized to `<30 days` vs. `not` |
+        | **Class Balance** | 11.2% positive (readmitted <30d) - severely imbalanced |
+        | **Time Period** | 1999 – 2008 |
+        | **Hospitals** | 130 U.S. hospitals and integrated delivery networks |
 
 ### Target Variable Distribution
 
-| Class | Count | Percentage |
-|---|---|---|
-| NO (not readmitted) | 54,864 | 53.9% |
-| >30 days | 35,545 | 34.9% |
-| <30 days *(positive class)* | 11,357 | 11.2% |
+        | Class | Count | Percentage |
+        |---|---|---|
+        | NO (not readmitted) | 54,864 | 53.9% |
+        | >30 days | 35,545 | 34.9% |
+        | <30 days *(positive class)* | 11,357 | 11.2% |
 
 ---
 
@@ -152,12 +100,12 @@ Cleaned Data (diabetic_cleaned.csv)
 
 ## 🧹 Data Cleaning
 
-All cleaning is handled in `1_data_cleaning.py`. Run it first — it outputs `diabetic_cleaned.csv`.
+All cleaning is handled in `1_data_cleaning.py`. Run it first - it outputs `diabetic_cleaned.csv`.
 
 | Step | Action | Reason |
 |---|---|---|
 | 1 | Replace `?` with `NaN` | Missing values were encoded as `?` |
-| 2 | Drop `weight` column | 96.9% missing — unusable |
+| 2 | Drop `weight` column | 96.9% missing - unusable |
 | 3 | Drop `encounter_id`, `patient_nbr` | ID columns, no predictive value |
 | 4 | Remove deceased patients (discharge = 11, 13, 14) | Readmission irrelevant for deceased |
 | 5 | Remove `Unknown/Invalid` gender | Only 3 records, noise |
@@ -179,9 +127,9 @@ Three Plotly visualizations were created in `2_plotly_visualizations.py` and thr
 
 | # | Chart | Key Insight |
 |---|---|---|
-| 1 | Bar: Readmission rate by age group | Middle-aged groups (40–60) have *higher* early readmission than elderly — counter-intuitive |
+| 1 | Bar: Readmission rate by age group | Middle-aged groups (40–60) have *higher* early readmission than elderly - counter-intuitive |
 | 2 | Box plot: Medications by readmission status | Patients readmitted <30d have ~18 median medications vs ~15 for non-readmitted |
-| 3 | Grouped bar: Insulin usage vs readmission | "Up" insulin adjustments correlate with higher early readmission — signals worsening control |
+| 3 | Grouped bar: Insulin usage vs readmission | "Up" insulin adjustments correlate with higher early readmission - signals worsening control |
 
 ### Tableau Visualizations
 
@@ -300,17 +248,17 @@ streamlit run 5_streamlit_app.py
 ```
 
 ### Streamlit Dashboard Features
-- 🔴 **ROC Curve** — both models overlaid with AUC scores
-- 📊 **Risk Score Histogram** — predicted probabilities split by true outcome
-- 📉 **Actual vs Predicted** — grouped bar by age / diagnosis / risk tier / gender (dropdown)
-- 🎛️ **Sidebar filters** — risk tier, gender, diagnosis category (updates all charts live)
-- 📌 **KPI cards** — total patients, model accuracy, % high risk, avg risk score
+- 🔴 **ROC Curve** - both models overlaid with AUC scores
+- 📊 **Risk Score Histogram** - predicted probabilities split by true outcome
+- 📉 **Actual vs Predicted** - grouped bar by age / diagnosis / risk tier / gender (dropdown)
+- 🎛️ **Sidebar filters** - risk tier, gender, diagnosis category (updates all charts live)
+- 📌 **KPI cards** - total patients, model accuracy, % high risk, avg risk score
 
 ---
 
 ## ▶️ How to Run
 
-### Step 1 — Clean the Data (Google Colab)
+### Step 1 - Clean the Data (Google Colab)
 ```python
 # In Google Colab:
 # 1. Upload diabetic_data.csv when prompted
@@ -318,14 +266,14 @@ streamlit run 5_streamlit_app.py
 # 3. Download diabetic_cleaned.csv
 ```
 
-### Step 2 — EDA Visualizations (Google Colab)
+### Step 2 - EDA Visualizations (Google Colab)
 ```python
 # 1. Upload diabetic_cleaned.csv when prompted
 # 2. Run all cells in 2_plotly_visualizations.py
 # 3. Charts render inline in Colab
 ```
 
-### Step 3 — Train ML Models (Google Colab)
+### Step 3 - Train ML Models (Google Colab)
 ```python
 # 1. Upload diabetic_cleaned.csv when prompted
 # 2. Run all cells in 3_ml_pipeline.py
@@ -334,19 +282,19 @@ streamlit run 5_streamlit_app.py
 #    model_metrics.csv, roc_curves.csv
 ```
 
-### Step 4 — Streamlit Dashboard (Local)
+### Step 4 - Streamlit Dashboard (Local)
 ```bash
 pip install -r requirements.txt
 streamlit run dashboard/5_streamlit_app.py
 ```
 
-### Step 5 — Power BI Dashboard
+### Step 5 - Power BI Dashboard
 Load the 3 output CSVs into Power BI Desktop:
 - `ml_results.csv` → risk distribution donut + KPI cards
 - `feature_importances.csv` → feature importance bar chart
 - `model_metrics.csv` → model comparison bar chart
 
-### Step 6 — Tableau Dashboard
+### Step 6 - Tableau Dashboard
 Load `diabetic_cleaned.csv` into Tableau Public for the 3 EDA visualizations.
 
 ---
