@@ -188,7 +188,7 @@ High stay length combined with high diagnosis count produces the darkest readmis
  
 **Visual 5 - Top 10 Medical Specialties by Early Readmission Rate**
  
-![V5](images/Top10MedicalSpecialtiesbyEarlyReadmissionRate(TableauV5).png)
+![V5](images/Top10MedicalSpecialtiesByEarlyReadmissionRate(TableauV5).png)
  
 Certain specialties show systematically higher early readmission rates, suggesting they treat higher-acuity patients or have gaps in discharge planning protocols.
  
@@ -196,7 +196,7 @@ Certain specialties show systematically higher early readmission rates, suggesti
  
 **Visual 6 - Readmission Outcomes by Patient Race**
  
-![V6](images/ReadmissionOutcomesbyPatientRace(TableauV6).png)
+![V6](images/ReadmissionOutcomesByPatientRace(TableauV6).png)
  
 Demographic disparities in early readmission proportions are visible across racial groups — an equity consideration for any clinical deployment of the model.
  
